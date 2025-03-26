@@ -108,23 +108,25 @@ topic_arn = arn:aws:sns:region:accountid:snsname  # SNS主题ARN
 
 
 ## 使用方法
+1. 数据库初始化
+- 执行sql-init.sql
 
-1. 配置文件设置
+2. 配置文件设置
 - 复制config.ini.example为config.ini
 - 填写相应的配置信息
 
-2. 部署Lambda
+3. 部署Lambda
 - 将代码下载后打包上传到AWS Lambda
 
-3. 配置Lambda
+4. 配置Lambda
 - 执行时长
 - VPC(可访问opensearch和mysql)
 - 权限（bedrcock、waf）
 
-4. 配置Eventbridge
+5. 配置Eventbridge
 - 配置计划任务
 
-5. 查看结果
+6. 查看结果
 - 邮件通知
 - 查看WAF规则组更新
 - mysql查询执行日志
