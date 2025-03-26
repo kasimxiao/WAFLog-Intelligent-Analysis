@@ -79,32 +79,23 @@ def task_excute():
     task_name = 'allow_request_detail'
     system_prompt = cf.get(task_name, 'system_prompt')
     user_prompt = cf.get(task_name, 'user_prompt')
+    
     detail_result = query_aos(task_name,ip_list)
 
     #测试代码
-    with open('ip.json') as json_data:
-        detail_result = json.load(json_data)
+    # with open('ip.json') as json_data:
+    #     detail_result = json.load(json_data)
     
     #转化为数组，减小token input
     detail_list = process_dsl_results(detail_result)
     user_prompt=f'{user_prompt}/n{detail_result}'
-    # user_message =  {"role": "user", "content": prompt}
-    # assistant_message =  {"role": "assistant", "content": "检测"}
-    # messages = [user_message,assistant_message]
-    # response = generate_message(messages)
 
-    response = generate_message(system_prompt,user_prompt,'检测')
-
-
-    print(response)
+    response = generate_message(system_prompt,user_prompt,'巡检')
 
     if '巡检正常' in f'巡检{response}':
         return message
         
-    # exception_result = response.replace('异常','')
     exception_result = extract_array(response)
-    print('exception_result')
-    print(exception_result)
 
     exception_list = eval(exception_result)
     #写入数据库
