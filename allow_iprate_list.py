@@ -90,9 +90,9 @@ def task_excute():
     detail_list = process_dsl_results(detail_result)
     user_prompt=f'{user_prompt}/n{detail_result}'
 
-    response = generate_message(system_prompt,user_prompt,'巡检')
+    response = generate_message(system_prompt,user_prompt,'检测')
 
-    if '巡检正常' in f'巡检{response}':
+    if '检测正常' in f'检测{response}':
         return message
         
     exception_result = extract_array(response)
