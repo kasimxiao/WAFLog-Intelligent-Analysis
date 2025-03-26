@@ -1,0 +1,25 @@
+[aos-config]
+host = your-opensearch-host
+service = es
+user = admin
+pwd = your-password
+table_name = your-table-name
+
+[mysql-config]
+host = your-mysql-host
+user = admin
+pwd = your-password
+database = waf
+
+[waf-config]
+ipset_name = blackip
+ipset_region = CLOUDFRONT
+ipset_id = your-waf-ipset-id
+group_name = ja3
+group_id = your-waf-group-id
+
+[sns]
+topic_arn = arn:aws:sns:region:accountid:topic-name
+
+[dashboard]
+dashboard_url = your-quicksight-dashboard-url
