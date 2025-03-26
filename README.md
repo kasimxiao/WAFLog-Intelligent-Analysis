@@ -3,7 +3,7 @@
 这是一个基于AWS WAF日志的自动分析系统，用于检测和处理异常访问行为。
 
 ## 架构
-![架构](/image/image3.png "架构")
+![架构](/image/image2.png "架构")
 - Eventbridge: 定义定期任务触发Lambda函数执行。例如可以设置每十分钟执行一次。
 - Lambda：定期调度并执行任务，逐个任务进行执行，查询OpenSearch中的日志进行分析，保存执行日志、异常记录、以及对WAF进行自动化更新或者邮件通知。
 - RDS：Mysql关系型数据，用以保存执行日志、异常记录、黑名单IP池。
@@ -11,7 +11,6 @@
 - Bedrock：调用Claude 3.5 sonnet进行日志的智能分析。
 - SNS：用于发送分析结果，尤其是出现异常时的通知。
 - Quicksight：提供报表能力，用以展示Mysql相关记录
-
 
 ## 日志处理流程
 ![数据流](/image/image1.png "数据流")
