@@ -87,33 +87,25 @@ def task_excute():
     system_prompt = cf.get(task_name, 'system_prompt')
     user_prompt = cf.get(task_name, 'user_prompt')
     ja3_list = []
-    # for i in ja3_result:
-    #     ja3_list.append(i[0])
-    # detail_result = query_aos(task_name,ja3_list)
     
-    #测试代码
-    with open('ja3.json') as json_data:
-        detail_result = json.load(json_data)
+    for i in ja3_result:
+        ja3_list.append(i[0])
+    detail_result = query_aos(task_name,ja3_list)
+    
+    # #测试代码
+    # with open('ja3.json') as json_data:
+    #     detail_result = json.load(json_data)
     
     #转化为数组，减小token input
     detail_list = process_dsl_results(detail_result)
-    print('detail_result')
-    print(detail_list)
     user_prompt=f'{user_prompt}/n{detail_result}'
-    # user_message =  {"role": "user", "content": prompt}
-    # assistant_message =  {"role": "assistant", "content": "检测"}
-    # messages = [user_message,assistant_message]
-    # response = generate_message(messages)
 
     response = generate_message(system_prompt,user_prompt,'检测')
-    print('response')
-    print(response)
+
     if '巡检正常' in f'巡检{response}':
         return message
 
     exception_result = extract_array(response)
-    print('exception_result')
-    print(exception_result)
     exception_list = eval(exception_result)
 
     seen = set()  # 用于去重
@@ -130,9 +122,6 @@ def task_excute():
 
     if len(ja3_string) > 0:
         message = f'以下JA3同时多个IP使用，经分析判定为恶意请求，将被封禁\n{ja3_string}\n'
-
-    #新增 waf group
-    # add_rule_to_group(ja3_list)
         
     # 获取XX时间段内异常ja3
     ja3_result = get_ja3_exception_list()
