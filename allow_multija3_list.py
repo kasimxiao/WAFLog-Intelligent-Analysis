@@ -102,7 +102,7 @@ def task_excute():
 
     response = generate_message(system_prompt,user_prompt,'检测')
 
-    if '巡检正常' in f'巡检{response}':
+    if '巡检正常' in f'检测{response}':
         return message
 
     exception_result = extract_array(response)
